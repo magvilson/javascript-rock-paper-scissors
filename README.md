@@ -8,6 +8,10 @@ I coded this project while following Ania Kubow's JavaScript tutorial, implement
 
 The project helped me strengthen my understanding of JavaScript fundamentals, browser interactions, and programming logic through hands-on practice.
 
+## Live Demo
+
+🎮 [Play Rock Paper Scissors](https://magvilson.github.io/javascript-rock-paper-scissors/)
+
 ## Technologies Used
 
 - HTML5
