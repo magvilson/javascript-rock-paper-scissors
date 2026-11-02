@@ -1,10 +1,14 @@
 const computerChoiceDisplay = document.getElementById('computer-choice')
 const userChoiceDisplay = document.getElementById('user-choice')
 const resultDisplay = document.getElementById('result')
-const possibleChoices = document.querySelectorAll('button')
+const possibleChoices = document.querySelectorAll('#rock, #paper, #scissors')
 let userChoice
 let computerChoice
 let result
+
+let playerScore = 0
+let computerScore = 0
+let drawScore = 0
 
 possibleChoices.forEach(possibleChoice => possibleChoice.addEventListener('click', (e) => {
   userChoice = e.target.id
@@ -30,25 +34,37 @@ function generateComputerChoice() {
 
 function getResult() {
   if (computerChoice === userChoice) {
-    result = 'its a draw!'
+    result = "It's a tie!"
+    drawScore++
+  } else if (
+    (userChoice === 'rock' && computerChoice === 'scissors') ||
+    (userChoice === 'paper' && computerChoice === 'rock') ||
+    (userChoice === 'scissors' && computerChoice === 'paper')
+  ) {
+    result = 'You win!'
+    playerScore++
+  } else {
+    result = 'You lose!'
+    computerScore++
   }
-  if (computerChoice === 'rock' && userChoice === "paper") {
-    result = 'you win!'
-  }
-  if (computerChoice === 'rock' && userChoice === "scissors") {
-    result = 'you lost!'
-  }
-  if (computerChoice === 'paper' && userChoice === "scissors") {
-    result = 'you win!'
-  }
-  if (computerChoice === 'paper' && userChoice === "rock") {
-    result = 'you lose!'
-  }
-  if (computerChoice === 'scissors' && userChoice === "rock") {
-    result = 'you win!'
-  }
-  if (computerChoice === 'scissors' && userChoice === "paper") {
-    result = 'you lose!'
-  }
-  resultDisplay.innerHTML = result
+
+  resultDisplay.textContent = result
+
+  document.getElementById('player-score').textContent = playerScore
+  document.getElementById('computer-score').textContent = computerScore
+  document.getElementById('draw-score').textContent = drawScore
 }
+
+document.getElementById('reset').addEventListener('click', () => {
+  playerScore = 0
+  computerScore = 0
+  drawScore = 0
+
+  document.getElementById('player-score').textContent = playerScore
+  document.getElementById('computer-score').textContent = computerScore
+  document.getElementById('draw-score').textContent = drawScore
+
+  userChoiceDisplay.textContent = ''
+  computerChoiceDisplay.textContent = ''
+  resultDisplay.textContent = 'Scores reset! Play again.'
+})
